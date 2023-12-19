@@ -20,18 +20,30 @@
                         <div class="card shadow-lg my-5 ">
                             <div class="card-body p-5 mt">
                                 <h1 class="fs-4 card-title fw-bold mb-4 text-center">Sign Up</h1>
+
+                                
+
                                 <form method="POST" class="needs-validation" novalidate="" autocomplete="off" action="/userCreated">
                                     
+                                    <% if (locals.enterUsername) { %>
+                                        <div class="alert alert-danger text-center" id="enterUsername">
+                                            <%= enterUsername %>
+                                        </div>
+                                    <% } %>
+                                    
+
                                     <div class="mb-3">
                                         <label class="mb-2 text-muted" for="email">Username</label>
-                                        <input id="email" type="email" class="form-control" name="username" value="" required autofocus>
+                                        <input id="username" type="text" class="form-control" name="username" value="" required autofocus>
                                         <div class="invalid-feedback">
-                                            Please enter this field
+
+                                            
+
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="mb-2 text-muted" for="email">E-Mail</label>
+                                        <label class="mb-2 text-muted" for="email">Email</label>
                                         <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
                                         <div class="invalid-feedback">
                                             Email is invalid
@@ -73,5 +85,13 @@
                 </div>
             </div>
         </section>
+        <script>
+        const enterUsername = document.getElementById("enterUsername");
+	    if (enterUsername){
+		    setTimeout(() => {
+			    enterUsername.style.display='none';
+		    }, 1500);
+	    }
+        </script>
     </body>
     </html>

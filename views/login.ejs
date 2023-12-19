@@ -20,10 +20,10 @@
 					<div class="card shadow-lg my-5 ">
 						<div class="card-body p-5 mt">
 							<h1 class="fs-4 card-title fw-bold mb-4 text-center">Login</h1>
-							<form method="POST" class="needs-validation" novalidate="" autocomplete="off" action="">
+							<form method="POST" class="needs-validation" autocomplete="off" action="/userVerification">
 								<div class="mb-3">
 									<label class="mb-2 text-muted" for="email">E-Mail</label>
-									<input id="email" type="email" class="form-control" name="name" value="" required autofocus>
+									<input id="email" type="email" class="form-control" name="email" required>
 									<div class="invalid-feedback">
 										Email is invalid
 									</div>
@@ -33,13 +33,13 @@
 									<div class="mb-2 w-100">
 										<label class="text-muted" for="password">Password</label>
 									</div>
-									<input id="password" type="password" class="form-control" name="password" required autofocus>
+									<input id="password" type="password" class="form-control" name="password" required>
 								    <div class="invalid-feedback">
 								    	Password is required
 							    	</div>
 								</div>
 								<div class="d-flex align-items-center justify-content-center">
-									<button type="submit" class="btn btn-primary mt-3">
+									<button type="submit" class="btn btn-primary mt-3" onclick="submitLoginForm()">
 										Login
 									</button>
 								</div>
@@ -55,5 +55,22 @@
 			</div>
 		</div>
 	</section>
+	<script>
+		// async function submitLoginForm() {
+		//   const username = document.getElementById('username').value;
+		//   const password = document.getElementById('password').value;
+	  
+		//   const response = await fetch('/api/login', {
+		// 	method: 'POST',
+		// 	headers: {
+		// 	  'Content-Type': 'application/json',
+		// 	},
+		// 	body: JSON.stringify({ username, password }),
+		//   });
+	  
+		//   const result = await response.json();
+		//   console.log(result);
+		// }
+	  </script>
 </body>
 </html>
