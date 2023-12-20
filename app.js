@@ -17,7 +17,7 @@ app.use(session({
 
 
 
-app.use(nocache());
+
 app.set('view engine','ejs')
 app.use(express.static('views'))
 app.use(express.json())
