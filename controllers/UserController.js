@@ -1,5 +1,5 @@
 const {User}=require('../models/userDB')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 
 
 
@@ -48,7 +48,7 @@ const renderHome = async (req,res) => {
     
     }}
 
-// log signup page
+// load signup page
 const renderSignup = async(req, res) => {
     try {
       res.render('signup')
@@ -83,9 +83,8 @@ const createUser = async (req, res) => {
         });
 
         await newUser.save();
-        req.session.user = newUser;
         console.log("User created successfully");
-        res.redirect('/')
+        res.redirect('/login')
     } catch (error) {
         console.error('Error creating user:', error);
     }
@@ -98,7 +97,7 @@ const logout = async (req,res) => {
                     console.log("Logout error");
                 }
                 console.log("Logged out successfully");
-                res.redirect("/login")
+                res.redirect("/")
             })
         } catch (error) {
             console.log('Logout Error');

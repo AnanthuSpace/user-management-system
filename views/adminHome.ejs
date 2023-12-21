@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row mb-4 d-flex justify-content-between">
+            <div class="col-md-3 ">
+                <a href="/admin/logout" class="btn btn-secondary">Log Out</a>
+            </div>
+
+            <div class="col-md-6">
+                <form>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-3 text-end">
+                <a href="/admin/new-user" class="btn btn-primary">Add New User</a>
+            </div>
+        </div>
+
+        <table class="table">
+        
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <!-- <th>Password</th> -->
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            
+                <%
+                if(user.length > 0){
+                    for(let i =0; i<user.length; i++){
+                    %>
+                <tr>
+                    <td><%= user[i].username %></td>
+                    <td><%= user[i].email %></td>
+                    <!-- <td>1234567890</td> -->
+                    
+                    <td>
+                        <a href="/admin/editUser">
+                            <img style="width: 20px; height: auto;"
+                            src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-coloricon-1/21/31-512.png"
+                            alt="Edit">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/admin/deleteUser">
+                            <img style="width: 20px; height: auto;"
+                                src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" alt="Delete">
+                        </a>
+                    </td>
+                </tr>
+                <%
+                    }
+                }
+                else{
+                    %>
+                    <tr>
+                        <td colspan="5">User Not Found</td>
+                    </tr>
+                    <%
+                    }
+                %>
+            
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
