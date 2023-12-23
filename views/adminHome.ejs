@@ -17,11 +17,11 @@
             </div>
 
             <div class="col-md-6">
-                <form>
+                <form action="/admin/searching">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="search" autocomplete="off">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-success" type="submit" onclick="redirectToSearch()">Search</button>
+                            <button class="btn btn-outline-success" type="submit">Search</button>
                         </div>
                     </div>
                 </form>
@@ -40,8 +40,8 @@
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
-            
-            
+
+
             <% if(userList.length> 0){
                 for(let i =0; i<userList.length; i++){ %>
                     <tr>
@@ -65,11 +65,11 @@
                                     src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" alt="Delete">
                             </a>
                         </td>
-                        
+
                     </tr>
                     <% } } else{ %>
                         <tr>
-                            <td colspan="5">User Not Found</td>
+                            <td colspan="4">User Not Found</td>
                         </tr>
                         <% } %>
 
@@ -77,12 +77,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function redirectToSearch() {
-        
-        window.location.href = '/admin/searching';
-    }
-    </script>
 </body>
 
 </html>

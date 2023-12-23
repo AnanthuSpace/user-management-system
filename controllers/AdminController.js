@@ -19,14 +19,14 @@ const adminLogin = async (req, res) => {
 // Get Admin Home Page and read the user details
 const adminHome = async (req, res) => {
   const { email, password } = req.body;
-  
+
   try {
     if (email === "admin@gmail.com" && password === "123") {
       req.session.admin = email;
       res.cookie("sessionId", req.sessionID, { httpOnly: true });
       res.redirect("/admin/getHome");
       return;
-    }else{
+    } else {
       res.render("adminLogin", { checkDetails: "Invalid User id and password" });
     }
   } catch (error) {
@@ -35,14 +35,14 @@ const adminHome = async (req, res) => {
   }
 };
 
-const getAdminHome = async(req,res) => {
+const getAdminHome = async (req, res) => {
   try {
-      let  userList = await User.find({});
-      res.render("adminHome", { userList });
-      console.log("USer Deatils Listed");
-    
+    let userList = await User.find({});
+    res.render("adminHome", { userList });
+    console.log("USer Deatils Listed");
+
   } catch (error) {
-      console.log("User value find Error",error);
+    console.log("User value find Error", error);
   }
 }
 
@@ -106,20 +106,31 @@ const getNewUser = async (req, res) => {
 
 
 // Handle Search form Submition
-const userSearch = async(req,res) =>{
+const userSearch = async (req, res) => {
   try {
-      
-      var search = '';
 
-      if(req.query.search){
-          search = req.query.search;
-      }
-      
-      const userData = await User.find({ name: { $regex:'.*'+search+'.*', $options: 'i' }})
-      res.render('adminHome',{userData});
+    let search = ''
+    if (req.query.search) {
+      search = req.query.search;
+    }
+
+    const userList = await User.find(
+      {
+        $or: [
+          { username: { $regex: '.*' + search + '.*', $options: 'i' } },
+          { email: { $regex: '.*' + search + '.*', $options: 'i' } }
+        ]
+      })
+    console.log("wrking")
+    res.render('adminHome', { userList, search });
   } catch (error) {
-      console.log("Search Error",error);
+    console.log("Search Error", error);
   }
+}
+
+// User Updation 
+const editUser = async (req,res) => {
+  console.log("Edit working");
 }
 
 module.exports = {
@@ -129,5 +140,6 @@ module.exports = {
   adminLogout,
   newUser,
   getNewUser,
-  userSearch
+  userSearch,
+  editUser
 };

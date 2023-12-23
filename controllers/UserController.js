@@ -59,7 +59,7 @@ const createUser = async (req, res) => {
 
   if (password !== repassword) {
     res.render("signup", { enterUsername: "Password do not match" });
-    return 
+    return
   }
   try {
     const existingUser = await User.findOne({ email });
