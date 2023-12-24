@@ -37,10 +37,13 @@ const adminHome = async (req, res) => {
 
 const getAdminHome = async (req, res) => {
   try {
-    let userList = await User.find({});
-    res.render("adminHome", { userList });
-    console.log("USer Deatils Listed");
-
+    if (req.session.admin) {
+      let userList = await User.find({});
+      res.render("adminHome", { userList });
+      console.log("USer Deatils Listed");
+    } else {
+      res.render('adminLogin')
+    }
   } catch (error) {
     console.log("User value find Error", error);
   }
@@ -88,7 +91,7 @@ const newUser = async (req, res) => {
 
     await newUser.save();
     console.log("User created successfully");
-    const userList = await User.find({}, { _id: 0, username: 1, email: 1 });
+    const userList = await User.find({});
     res.render("adminHome", { userList });
   } catch (error) {
     console.error("Error creating user:", error);
@@ -128,10 +131,47 @@ const userSearch = async (req, res) => {
   }
 }
 
-// User Updation 
-const editUser = async (req,res) => {
-  console.log("Edit working");
+// Render Update Page
+const renderUpdate = async (req, res) => {
+  try {
+
+    const id = req.query.id;
+
+    const userList = await User.findById({ _id: id });
+
+    if (userList) {
+      res.render('updateUser', { user: userList });
+    } else {
+      res.redirect('getHome');
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
 }
+
+// Update User Details
+const updateUser = async (req, res) => {
+  try {
+
+    const userId = req.query.id
+    const data = req.body
+
+    await User.updateOne({ _id: userId },
+      {
+        $set:
+        {
+          username: data.updateUsername,
+          email: data.updateEmail,
+          password: data.updatePass
+        }
+      })
+      .then(x => console.log(x))
+    res.redirect('getHome');
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 
 module.exports = {
   adminLogin,
@@ -141,5 +181,6 @@ module.exports = {
   newUser,
   getNewUser,
   userSearch,
-  editUser
+  renderUpdate,
+  updateUser
 };

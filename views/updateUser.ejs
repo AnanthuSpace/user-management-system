@@ -6,7 +6,7 @@
     <meta name="author" content="Muhamad Nauval Azhar" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="This is a login page template based on Bootstrap 5" />
-    <title>Add User</title>
+    <title>Update User</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
 </head>
@@ -16,53 +16,46 @@
         <div class="container h-100">
             <div class="row justify-content-sm-center h-100">
                 <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-                    
+
                     <div class="card shadow-lg my-5">
                         <div class="card-body p-5 mt">
                             <h1 class="fs-4 card-title fw-bold mb-4 text-center">
-                                Add New User
+                                Update User Details
                             </h1>
 
-                            <form method="POST" class="needs-validation" action="/admin/editUser">
-                                <% if (locals.enterUsername) { %>
-                                    <div class="alert alert-danger text-center" id="enterUsername">
-                                        <%= enterUsername %>
+                            <form method="POST" class="needs-validation" action="/admin/editUser?id=<%= user._id %>">
+
+                                <div class="mb-3">
+                                    <input id="username" type="hidden" class="form-control" name="userid" value=""
+                                        required autofocus />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="mb-2 text-muted">Username</label>
+                                    <input id="updateUsername" type="text" class="form-control" name="updateUsername"
+                                        value="" required autofocus />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="mb-2 text-muted">Email</label>
+                                    <input id="updateEmail" type="email" class="form-control" name="updateEmail"
+                                        value="" required autofocus />
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="mb-2 w-100">
+                                        <label class="text-muted">Password</label>
                                     </div>
-                                    <% } %>
+                                    <input id="updatePass" type="password" class="form-control" name="updatePass"
+                                        required autofocus />
+                                </div>
 
-                                        <div class="mb-3">
-                                            <label class="mb-2 text-muted" for="email">Username</label>
-                                            <input id="username" type="text" class="form-control" name="username"
-                                                value="" required autofocus />
-                                        </div>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <button type="submit" class="btn btn-primary mt-3">
+                                        Update
+                                    </button>
 
-                                        <div class="mb-3">
-                                            <label class="mb-2 text-muted" for="email">Email</label>
-                                            <input id="email" type="email" class="form-control" name="email" value=""
-                                                required autofocus />
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <div class="mb-2 w-100">
-                                                <label class="text-muted" for="password">Password</label>
-                                            </div>
-                                            <input id="password" type="password" class="form-control" name="password"
-                                                required autofocus />
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <div class="mb-2 w-100">
-                                                <label class="text-muted" for="password">Confirm Password</label>
-                                            </div>
-                                            <input id="password" type="password" class="form-control" name="repassword"
-                                                required autofocus />
-                                        </div>
-
-                                        <div class="d-flex align-items-center justify-content-center">
-                                            <button type="submit" class="btn btn-primary mt-3">
-                                                Add User
-                                            </button>
-                                        </div>
+                                </div>
                             </form>
                         </div>
 
@@ -72,12 +65,7 @@
         </div>
     </section>
     <script>
-        const enterUsername = document.getElementById("enterUsername");
-        if (enterUsername) {
-            setTimeout(() => {
-                enterUsername.style.display = "none";
-            }, 3000);
-        }
+
     </script>
 </body>
 
