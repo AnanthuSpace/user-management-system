@@ -12,6 +12,7 @@ router.post("/new-user", AdminController.newUser);
 router.get('/searching', AdminController.userSearch);
 router.get('/editUser', AdminController.renderUpdate);
 router.post('/editUser', AdminController.updateUser);
+router.get('/deleteUser', AdminController.deleteUser);
 
 
 module.exports = router;

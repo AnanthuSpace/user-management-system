@@ -124,7 +124,7 @@ const userSearch = async (req, res) => {
           { email: { $regex: '.*' + search + '.*', $options: 'i' } }
         ]
       })
-    console.log("wrking")
+    
     res.render('adminHome', { userList, search });
   } catch (error) {
     console.log("Search Error", error);
@@ -155,21 +155,33 @@ const updateUser = async (req, res) => {
 
     const userId = req.query.id
     const data = req.body
-
+    const hashedPassword = await bcrypt.hash(req.body.updatePass, 10)
     await User.updateOne({ _id: userId },
       {
         $set:
         {
           username: data.updateUsername,
           email: data.updateEmail,
-          password: data.updatePass
+          password: hashedPassword
         }
       })
       .then(x => console.log(x))
     res.redirect('getHome');
   } catch (error) {
-    console.log(error.message);
+    res.redirect('getHome')
+    console.log("user update error",error);
   }
+}
+
+const deleteUser = async(req,res) =>{
+      try {
+        const userId = req.query.id;
+        console.log(userId);
+        await User.deleteOne({_id:userId});
+        res.redirect('/admin/getHome');
+      } catch (error) {
+        res.redirect('getHome')
+      }
 }
 
 
@@ -182,5 +194,6 @@ module.exports = {
   getNewUser,
   userSearch,
   renderUpdate,
-  updateUser
+  updateUser,
+  deleteUser
 };
