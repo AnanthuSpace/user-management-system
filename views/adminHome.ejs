@@ -19,7 +19,7 @@
             <div class="col-md-6">
                 <form action="/admin/searching">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" name="search" autocomplete="off">
+                        <input type="text" class="form-control" placeholder="Search" name="search" autocomplete="off" value="<%=userList.search %>">
                         <div class="input-group-append">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </div>
@@ -69,7 +69,7 @@
                     </tr>
                     <% } } else{ %>
                         <tr>
-                            <td colspan="4">User Not Found</td>
+                            <td colspan="4" style="color: red;">User Not Found</td>
                         </tr>
                         <% } %>
 

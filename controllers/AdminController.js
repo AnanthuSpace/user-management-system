@@ -120,12 +120,13 @@ const userSearch = async (req, res) => {
     const userList = await User.find(
       {
         $or: [
-          { username: { $regex: '.*' + search + '.*', $options: 'i' } },
-          { email: { $regex: '.*' + search + '.*', $options: 'i' } }
+          { username: { $regex: new RegExp(`^${search}`,'i') }},
+          { email: { $regex: new RegExp(`^${search}`,'i')  } }
         ]
       })
+      userList.search = search;
     
-    res.render('adminHome', { userList, search });
+    res.render('adminHome', { userList});
   } catch (error) {
     console.log("Search Error", error);
   }
@@ -137,8 +138,7 @@ const renderUpdate = async (req, res) => {
 
     const id = req.query.id;
 
-    const userList = await User.findById({ _id: id });
-
+    const userList = await User.findById(id);
     if (userList) {
       res.render('updateUser', { user: userList });
     } else {
