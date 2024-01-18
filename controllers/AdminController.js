@@ -69,6 +69,13 @@ const adminLogout = async (req, res) => {
 const newUser = async (req, res) => {
   const { username, email, password, repassword } = req.body;
 
+  const trimmedUsername = username.trim()
+
+  if (!trimmedUsername) {
+    res.render('newUser', { enterUsername: "Username cannot be just whitespaces." })
+    return
+  }
+
   if (password !== repassword) {
     res.render("newUser", { enterUsername: "Password do not match" });
     return
@@ -120,13 +127,13 @@ const userSearch = async (req, res) => {
     const userList = await User.find(
       {
         $or: [
-          { username: { $regex: new RegExp(`^${search}`,'i') }},
-          { email: { $regex: new RegExp(`^${search}`,'i')  } }
+          { username: { $regex: new RegExp(`^${search}`, 'i') } },
+          { email: { $regex: new RegExp(`^${search}`, 'i') } }
         ]
       })
-      userList.search = search;
-    
-    res.render('adminHome', { userList});
+    userList.search = search;
+
+    res.render('adminHome', { userList });
   } catch (error) {
     console.log("Search Error", error);
   }
@@ -151,11 +158,19 @@ const renderUpdate = async (req, res) => {
 
 // Update User Details
 const updateUser = async (req, res) => {
+
+
   try {
 
     const userId = req.query.id
     const data = req.body
-    const hashedPassword = await bcrypt.hash(req.body.updatePass, 10)
+
+    const updateUsername = data.updateUsername.trim()
+
+    if (!updateUsername) {
+      return res.render('updateUser', { user: data, enterUsername: "Username cannot be just whitespaces." });
+    }
+    const hashedPassword = await bcrypt.hash(data.updatePass, 10)
     await User.updateOne({ _id: userId },
       {
         $set:
@@ -169,19 +184,19 @@ const updateUser = async (req, res) => {
     res.redirect('getHome');
   } catch (error) {
     res.redirect('getHome')
-    console.log("user update error",error);
+    console.log("user update error", error);
   }
 }
 
-const deleteUser = async(req,res) =>{
-      try {
-        const userId = req.query.id;
-        console.log(userId);
-        await User.deleteOne({_id:userId});
-        res.redirect('/admin/getHome');
-      } catch (error) {
-        res.redirect('getHome')
-      }
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.query.id;
+    console.log(userId);
+    await User.deleteOne({ _id: userId });
+    res.redirect('/admin/getHome');
+  } catch (error) {
+    res.redirect('getHome')
+  }
 }
 
 

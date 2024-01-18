@@ -23,37 +23,44 @@
 
                             <form method="POST" class="needs-validation" action="/admin/editUser?id=<%= user._id %>">
 
-                                <div class="mb-3">
-                                    <input id="username" type="hidden" class="form-control" name="userid" value=""
-                                        required autofocus />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="mb-2 text-muted">Username</label>
-                                    <input value="<%= user.username %>" id="updateUsername" type="text" class="form-control" name="updateUsername"
-                                        value="" required autofocus />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="mb-2 text-muted">Email</label>
-                                    <input value="<%= user.email %>" id="updateEmail" type="email" class="form-control" name="updateEmail"
-                                        value="" required autofocus />
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="mb-2 w-100">
-                                        <label class="text-muted">Password</label>
+                                <% if (locals.enterUsername) { %>
+                                    <div class="alert alert-danger text-center" id="enterUsername">
+                                        <%= enterUsername %>
                                     </div>
-                                    <input value="....." id="updatePass" type="password" class="form-control" name="updatePass"
-                                        required autofocus />
-                                </div>
+                                    <% } %>
 
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <button type="submit" class="btn btn-primary mt-3">
-                                        Update
-                                    </button>
+                                        <div class="mb-3">
+                                            <input id="username" type="hidden" class="form-control" name="userid"
+                                                value="" required autofocus />
+                                        </div>
 
-                                </div>
+                                        <div class="mb-3">
+                                            <label class="mb-2 text-muted">Username</label>
+                                            <input value="<%= user.username %>" id="updateUsername" type="text"
+                                                class="form-control" name="updateUsername" value="" required
+                                                autofocus />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="mb-2 text-muted">Email</label>
+                                            <input value="<%= user.email %>" id="updateEmail" type="email"
+                                                class="form-control" name="updateEmail" value="" required autofocus />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <div class="mb-2 w-100">
+                                                <label class="text-muted">Password</label>
+                                            </div>
+                                            <input value="" id="updatePass" type="password" class="form-control"
+                                                name="updatePass" required autofocus />
+                                        </div>
+
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <button type="submit" class="btn btn-primary mt-3">
+                                                Update
+                                            </button>
+
+                                        </div>
                             </form>
                         </div>
 
@@ -63,6 +70,12 @@
         </div>
     </section>
     <script>
+        const enterUsername = document.getElementById("enterUsername");
+        if (enterUsername) {
+            setTimeout(() => {
+                enterUsername.style.display = "none";
+            }, 3000);
+        }
 
     </script>
 </body>

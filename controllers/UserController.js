@@ -36,6 +36,7 @@ const userVerification = async (req, res) => {
   }
 };
 
+// Render Home page
 const renderHome = async (req, res) => {
   if (req.session.user) {
     res.render("home", { user: req.session.user });
@@ -57,10 +58,18 @@ const renderSignup = async (req, res) => {
 const createUser = async (req, res) => {
   const { username, email, password, repassword } = req.body;
 
+  const trimmedUsername = username.trim()
+
+  if (!trimmedUsername) {
+    res.render('signup', { enterUsername: "Username cannot be just whitespaces." })
+    return
+  }
+
   if (password !== repassword) {
     res.render("signup", { enterUsername: "Password do not match" });
     return
   }
+
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
