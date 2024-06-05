@@ -1,16 +1,24 @@
-<h1>User Management System </h1>
+### User Management System
 
-<h2>User Panel</h2>
-<ol> 
-  <li>login, signup and home page for users.</li>
-  <li>Store the user data on a database.</li>
-  <li>Proper Session and cookies.</li>
-</ol>
-<br><br>
-<h2>Admin panel</h2>
-<ol> 
-  <li>Admin had a login with validation.</li>
-  <li> Admin able to view and perform a search on user data.</li>
-  <li>Admin able to create, delete and edit user data.</li>
-  <li>Sessions and Cookies are working properly.</li>
-</ol>
+This repository contains a User Management System with a user panel and an admin panel. The user panel supports login, signup, and session management, while the admin panel allows for managing user data, including creating, editing, and deleting users, with secure session handling.
+
+### README
+
+#### Features
+- User Panel
+  - Signup and Login
+  - Session and Cookie Management
+- Admin Panel
+  - Login with Validation
+  - View, Search, Create, Edit, and Delete Users
+  - Session and Cookie Management
+
+#### Technologies Used
+- Node.js
+- Express.js
+- EJS
+
+#### Installation
+1. Clone the repository.
+2. Install dependencies with `npm install`.
+3. Run the application with `npm start`.
